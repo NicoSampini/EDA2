@@ -20,59 +20,59 @@ void mostrarMenu()
 
 void ejecutarOpcion(Grafo &g, int opcion)
 {
-    if (opcion == 1)
+    switch (opcion)
     {
+    case 1:
         g.mostrarNodos();
-    }
-    else if (opcion == 2)
-    {
+        break;
+
+    case 2:
         g.mostrarMatriz();
-    }
-    else if (opcion == 3)
+        break;
+
+    case 3:
     {
         int id;
-
         g.mostrarNodos();
         cout << endl;
         cout << "Ingrese el ID del nodo: ";
         cin >> id;
-
         g.mostrarConexionesDeNodo(id);
+        break;
     }
-    else if (opcion == 4)
-    {
-        int origen;
-        int destino;
 
+    case 4:
+    {
+        int origen, destino;
         g.mostrarNodos();
         cout << endl;
         cout << "Ingrese ID de origen: ";
         cin >> origen;
         cout << "Ingrese ID de destino: ";
         cin >> destino;
-
         g.consultarDistancia(origen, destino);
+        break;
     }
-    else if (opcion == 5)
-    {
-        int origen;
-        int destino;
 
+    case 5:
+    {
+        int origen, destino;
         g.mostrarNodos();
         cout << endl;
         cout << "Ingrese ID de origen: ";
         cin >> origen;
         cout << "Ingrese ID de destino: ";
         cin >> destino;
-
         g.cortarORestaurarConexion(origen, destino);
+        break;
     }
-    else if (opcion == 0)
-    {
+
+    case 0:
         cout << "Saliendo del sistema..." << endl;
-    }
-    else
-    {
+        break;
+
+    default:
         cout << "Opcion invalida." << endl;
+        break;
     }
 }
