@@ -23,6 +23,7 @@ public:
     void mostrarMatriz();
     void mostrarConexionesDeNodo(int id);
     void consultarDistancia(int origen, int destino);
+    void dijkstra(int origen, int destino);
 };
 
 #endif
