@@ -1,0 +1,43 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "UI.h"
+#include "Grafo.h"
+#include "DatosIniciales.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TInterfazGrafica *InterfazGrafica;
+
+//---------------------------------------------------------------------------
+__fastcall TInterfazGrafica::TInterfazGrafica(TComponent* Owner)
+	: TForm(Owner)
+{
+    cargarDatosIniciales(g);
+
+    for(int i = 0; i < NODOS_CANTIDAD; i++)
+    {
+    	OrigenCB->Items->Add(String(g.enviarNombres(i).c_str()));
+        DestinoCB->Items->Add(String(g.enviarNombres(i).c_str()));
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TInterfazGrafica::BtnSalirClick(TObject *Sender)
+{
+    Close();
+}
+//---------------------------------------------------------------------------
+void __fastcall TInterfazGrafica::BtnBuscarClick(TObject *Sender)
+{
+    int origen = OrigenCB->ItemIndex;
+    int destino = DestinoCB->ItemIndex;
+
+    if (origen == -1 || origen == -1) {
+       return;
+    }
+
+    g.consultarDistancia(origen, destino);
+}
+//---------------------------------------------------------------------------

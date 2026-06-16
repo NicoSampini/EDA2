@@ -123,22 +123,30 @@
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="MainCordoba.cpp">
-            <BuildOrder>1</BuildOrder>
+        <CppCompile Include="DatosIniciales.cpp">
+            <BuildOrder>3</BuildOrder>
         </CppCompile>
+        <None Include="DatosIniciales.h">
+            <BuildOrder>1</BuildOrder>
+        </None>
         <CppCompile Include="Grafo.cpp">
             <BuildOrder>2</BuildOrder>
         </CppCompile>
-        <CppCompile Include="DatosIniciales.cpp">
-            <BuildOrder>3</BuildOrder>
+        <None Include="Grafo.h">
+            <BuildOrder>0</BuildOrder>
+        </None>
+        <CppCompile Include="MainCordoba.cpp">
+            <BuildOrder>1</BuildOrder>
         </CppCompile>
         <CppCompile Include="Menu.cpp">
             <BuildOrder>4</BuildOrder>
         </CppCompile>
-        <None Include="Nodo.h"/>
-        <None Include="Grafo.h"/>
-        <None Include="DatosIniciales.h"/>
-        <None Include="Menu.h"/>
+        <None Include="Menu.h">
+            <BuildOrder>2</BuildOrder>
+        </None>
+        <None Include="Nodo.h">
+            <BuildOrder>4</BuildOrder>
+        </None>
         <PCHCompile Include="ProjectCordobaPCH1.h">
             <BuildOrder>0</BuildOrder>
             <PCH>true</PCH>

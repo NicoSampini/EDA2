@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <string>
 
 #include "Grafo.h"
 
@@ -169,29 +170,38 @@ void Grafo::consultarDistancia(int origen, int destino)
 {
     if (origen < 0 || origen >= NODOS_CANTIDAD || destino < 0 || destino >= NODOS_CANTIDAD)
     {
-        cout << "Uno de los IDs ingresados no es valido." << endl;
+        //cout << "Uno de los IDs ingresados no es valido." << endl;
+        ShowMessage("Uno de los IDs ingresados no es valido.");
         return;
     }
 
-    cout << endl;
-    cout << "Consulta de distancia" << endl;
-    cout << "---------------------" << endl;
+    //cout << endl;
+    //cout << "Consulta de distancia" << endl;
+    //cout << "---------------------" << endl;
+
 
     if (matriz[origen][destino] == -1)
     {
-        cout << "No existe conexion directa entre ";
-        cout << nodos[origen].nombre << " y " << nodos[destino].nombre << "." << endl;
+        //cout << "No existe conexion directa entre ";
+        //cout << nodos[origen].nombre << " y " << nodos[destino].nombre << "." << endl;
+        ShowMessage("No existe conexion directa entre" + String(nodos[origen].nombre) + " y " + String(nodos[destino].nombre));
     }
     else if (matriz[origen][destino] < -1)
     {
-        cout << "La ruta entre ";
-        cout << nodos[origen].nombre << " y " << nodos[destino].nombre;
-        cout << " esta cortada temporalmente." << endl;
+        //cout << "La ruta entre ";
+        //cout << nodos[origen].nombre << " y " << nodos[destino].nombre;
+        //cout << " esta cortada temporalmente." << endl;
+        ShowMessage("La ruta entre " + String(nodos[origen].nombre) + " y " + String(nodos[destino].nombre) + " esta cortada temporalmente.");
     }
     else
     {
-        cout << "Distancia entre ";
-        cout << nodos[origen].nombre << " y " << nodos[destino].nombre;
-        cout << ": " << matriz[origen][destino] << " km" << endl;
+        //cout << "Distancia entre ";
+        //cout << nodos[origen].nombre << " y " << nodos[destino].nombre;
+        //cout << ": " << matriz[origen][destino] << " km" << endl;
+        ShowMessage("Distancia entre " + String(nodos[origen].nombre) + " y " + String(nodos[destino].nombre) + ": "+ matriz[origen][destino] + " km");
     }
+}
+
+std::string Grafo::enviarNombres(int i){
+	return nodos[i];
 }
