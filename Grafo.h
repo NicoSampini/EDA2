@@ -17,14 +17,14 @@ public:
     Grafo();
 
     void conectar(int a, int b, int distancia);
-    void setearNodo(int id, const char nombre[], int x, int y);
+    void setearNodo(int id, const char nombre[], int x, int y, int xPX, int yPX);
     void cortarORestaurarConexion(int a, int b);
     int verSiConexionActiva(int a, int b);
 
     void mostrarNodos();
     void mostrarMatriz();
     void mostrarConexionesDeNodo(int id);
-    void consultarDistancia(int origen, int destino);
+    int consultarDistancia(int origen, int destino);
 
     Nodo enviarNodo(int i);
 };

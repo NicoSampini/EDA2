@@ -35,12 +35,14 @@ void Grafo::conectar(int a, int b, int distancia)
     matriz[b][a] = distancia;
 }
 
-void Grafo::setearNodo(int id, const char nombre[], int x, int y)
+void Grafo::setearNodo(int id, const char nombre[], int x, int y, int xPX, int yPX)
 {
     nodos[id].id = id;
     strcpy(nodos[id].nombre, nombre);
     nodos[id].x = x;
     nodos[id].y = y;
+    nodos[id].xPX = xPX;
+    nodos[id].yPX = yPX;
 }
 
 void Grafo::cortarORestaurarConexion(int a, int b)
@@ -166,13 +168,12 @@ void Grafo::mostrarConexionesDeNodo(int id)
     }
 }
 
-void Grafo::consultarDistancia(int origen, int destino)
+int Grafo::consultarDistancia(int origen, int destino)
 {
     if (origen < 0 || origen >= NODOS_CANTIDAD || destino < 0 || destino >= NODOS_CANTIDAD)
     {
         //cout << "Uno de los IDs ingresados no es valido." << endl;
-        ShowMessage("Uno de los IDs ingresados no es valido.");
-        return;
+        return -3;
     }
 
     //cout << endl;
@@ -184,21 +185,24 @@ void Grafo::consultarDistancia(int origen, int destino)
     {
         //cout << "No existe conexion directa entre ";
         //cout << nodos[origen].nombre << " y " << nodos[destino].nombre << "." << endl;
-        ShowMessage("No existe conexion directa entre" + String(nodos[origen].nombre) + " y " + String(nodos[destino].nombre));
+        //ShowMessage("No existe conexion directa entre" + String(nodos[origen].nombre) + " y " + String(nodos[destino].nombre));
+        return -1;
     }
     else if (matriz[origen][destino] < -1)
     {
         //cout << "La ruta entre ";
         //cout << nodos[origen].nombre << " y " << nodos[destino].nombre;
         //cout << " esta cortada temporalmente." << endl;
-        ShowMessage("La ruta entre " + String(nodos[origen].nombre) + " y " + String(nodos[destino].nombre) + " esta cortada temporalmente.");
+        //ShowMessage("La ruta entre " + String(nodos[origen].nombre) + " y " + String(nodos[destino].nombre) + " esta cortada temporalmente.");
+        return -1;
     }
     else
     {
         //cout << "Distancia entre ";
         //cout << nodos[origen].nombre << " y " << nodos[destino].nombre;
         //cout << ": " << matriz[origen][destino] << " km" << endl;
-        ShowMessage("Distancia entre " + String(nodos[origen].nombre) + " y " + String(nodos[destino].nombre) + ": "+ matriz[origen][destino] + " km");
+        //ShowMessage("Distancia entre " + String(nodos[origen].nombre) + " y " + String(nodos[destino].nombre) + ": "+ matriz[origen][destino] + " km");
+        return matriz[origen][destino];
     }
 }
 

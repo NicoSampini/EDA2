@@ -7,6 +7,8 @@ struct Nodo
     char nombre[50];
     int x;
     int y;
+    int xPX;
+    int yPX;
 };
 
 #endif
