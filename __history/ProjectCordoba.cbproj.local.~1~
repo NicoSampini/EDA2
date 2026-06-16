@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2026/05/26 11:45:17.991,=C:\Users\vboxuser\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2026/05/26 11:45:18.366,=C:\Users\vboxuser\Documents\Embarcadero\Studio\Projects\File1.cpp</Transaction>
+    <Transaction>2026/05/26 11:46:07.109,C:\Users\vboxuser\Desktop\Estructura 2\EDA2\ProjectCordobaPCH1.h=C:\Users\vboxuser\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2026/05/26 11:46:07.123,C:\Users\vboxuser\Desktop\Estructura 2\EDA2\File1.cpp=C:\Users\vboxuser\Documents\Embarcadero\Studio\Projects\File1.cpp</Transaction>
+    <Transaction>2026/05/26 11:46:07.135,C:\Users\vboxuser\Desktop\Estructura 2\EDA2\ProjectCordoba.cbproj=C:\Users\vboxuser\Documents\Embarcadero\Studio\Projects\Project1.cbproj</Transaction>
+    <Transaction>2026/05/26 11:46:29.760,C:\Users\vboxuser\Desktop\Estructura 2\EDA2\MainCordoba.cpp=C:\Users\vboxuser\Desktop\Estructura 2\EDA2\File1.cpp</Transaction>
+    <Transaction>2026/05/26 11:46:33.758,C:\Users\vboxuser\Desktop\Estructura 2\EDA2\ProjectCordoba.cbproj=C:\Users\vboxuser\Desktop\Estructura 2\EDA2\ProjectCordoba.cbproj</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-#include <climits>
+#include <string>
 
 #include "Grafo.h"
 
@@ -35,12 +35,14 @@ void Grafo::conectar(int a, int b, int distancia)
     matriz[b][a] = distancia;
 }
 
-void Grafo::setearNodo(int id, const char nombre[], int x, int y)
+void Grafo::setearNodo(int id, const char nombre[], int x, int y, int xPX, int yPX)
 {
     nodos[id].id = id;
     strcpy(nodos[id].nombre, nombre);
     nodos[id].x = x;
     nodos[id].y = y;
+    nodos[id].xPX = xPX;
+    nodos[id].yPX = yPX;
 }
 
 void Grafo::cortarORestaurarConexion(int a, int b)
@@ -166,155 +168,44 @@ void Grafo::mostrarConexionesDeNodo(int id)
     }
 }
 
-void Grafo::consultarDistancia(int origen, int destino)
+int Grafo::consultarDistancia(int origen, int destino)
 {
     if (origen < 0 || origen >= NODOS_CANTIDAD || destino < 0 || destino >= NODOS_CANTIDAD)
     {
-        cout << "Uno de los IDs ingresados no es valido." << endl;
-        return;
+        //cout << "Uno de los IDs ingresados no es valido." << endl;
+        return -3;
     }
 
-    cout << endl;
-    cout << "Consulta de distancia" << endl;
-    cout << "---------------------" << endl;
+    //cout << endl;
+    //cout << "Consulta de distancia" << endl;
+    //cout << "---------------------" << endl;
+
 
     if (matriz[origen][destino] == -1)
     {
-        cout << "No existe conexion directa entre ";
-        cout << nodos[origen].nombre << " y " << nodos[destino].nombre << "." << endl;
+        //cout << "No existe conexion directa entre ";
+        //cout << nodos[origen].nombre << " y " << nodos[destino].nombre << "." << endl;
+        //ShowMessage("No existe conexion directa entre" + String(nodos[origen].nombre) + " y " + String(nodos[destino].nombre));
+        return -1;
     }
     else if (matriz[origen][destino] < -1)
     {
-        cout << "La ruta entre ";
-        cout << nodos[origen].nombre << " y " << nodos[destino].nombre;
-        cout << " esta cortada temporalmente." << endl;
+        //cout << "La ruta entre ";
+        //cout << nodos[origen].nombre << " y " << nodos[destino].nombre;
+        //cout << " esta cortada temporalmente." << endl;
+        //ShowMessage("La ruta entre " + String(nodos[origen].nombre) + " y " + String(nodos[destino].nombre) + " esta cortada temporalmente.");
+        return -1;
     }
     else
     {
-        cout << "Distancia entre ";
-        cout << nodos[origen].nombre << " y " << nodos[destino].nombre;
-        cout << ": " << matriz[origen][destino] << " km" << endl;
+        //cout << "Distancia entre ";
+        //cout << nodos[origen].nombre << " y " << nodos[destino].nombre;
+        //cout << ": " << matriz[origen][destino] << " km" << endl;
+        //ShowMessage("Distancia entre " + String(nodos[origen].nombre) + " y " + String(nodos[destino].nombre) + ": "+ matriz[origen][destino] + " km");
+        return matriz[origen][destino];
     }
 }
 
-void Grafo::dijkstra(int origen, int destino)
-{
-
-    if (origen < 0 || origen >= NODOS_CANTIDAD)
-    {
-        cout << "ID de origen invalida" << endl;
-        return;
-    }
-
-    if (destino < 0 || destino >= NODOS_CANTIDAD)
-    {
-        cout << "ID de destino invalida" << endl;
-        return;
-    }
-
-    if (origen == destino)
-    {
-        cout << "El origen y destino no pueden ser iguales" << endl;
-        return;
-    }
-
-    int distancias[NODOS_CANTIDAD];
-    bool visitado[NODOS_CANTIDAD];
-    int anterior[NODOS_CANTIDAD];
-    int nodoActual = origen;
-
-    for (int i = 0; i < NODOS_CANTIDAD; i++)
-    {
-        distancias[i] = INT_MAX;
-        visitado[i] = false;
-        anterior[i] = -1;
-    }
-
-    distancias[nodoActual] = 0;
-
-    int changed = 1;
-
-    while (changed == 1)
-    {
-        changed = 0;
-        visitado[nodoActual] = true;
-        for (int i = 0; i < NODOS_CANTIDAD; i++)
-        {
-            if (matriz[nodoActual][i] > 0 &&
-                distancias[nodoActual] + matriz[nodoActual][i] < distancias[i])
-            {
-                distancias[i] =
-                    distancias[nodoActual] + matriz[nodoActual][i];
-
-                anterior[i] = nodoActual;
-            }
-        }
-
-        int distanciaMinima = INT_MAX;
-
-        for (int i = 0; i < NODOS_CANTIDAD; i++)
-        {
-            if (!visitado[i] && distancias[i] < distanciaMinima)
-            {
-                nodoActual = i;
-                distanciaMinima = distancias[i];
-                changed = 1;
-            }
-        }
-
-        if (nodoActual == destino)
-        {
-            changed = 0;
-
-            cout << endl;
-            cout << "======================================" << endl;
-            cout << "MEJOR RUTA DESDE "
-                 << nodos[origen].nombre
-                 << " HASTA "
-                 << nodos[destino].nombre
-                 << endl;
-
-            cout << "DISTANCIA TOTAL: "
-                 << distancias[destino]
-                 << " km"
-                 << endl;
-
-            cout << "======================================" << endl;
-
-            int camino[NODOS_CANTIDAD];
-            int cantidad = 0;
-
-            int actual = destino;
-
-            while (actual != -1)
-            {
-                camino[cantidad] = actual;
-                cantidad++;
-
-                actual = anterior[actual];
-            }
-
-            cout << endl;
-            cout << "RECORRIDO:" << endl;
-            cout << endl;
-
-            for (int i = cantidad - 1; i > 0; i--)
-            {
-                int desde = camino[i];
-                int hasta = camino[i - 1];
-
-                cout << nodos[desde].nombre
-                     << " -> "
-                     << nodos[hasta].nombre
-                     << " | "
-                     << matriz[desde][hasta]
-                     << " km"
-                     << endl;
-            }
-        }
-        else if (changed == 0)
-        {
-            cout << "No existe un camino disponible" << endl;
-        }
-    }
+Nodo Grafo::enviarNodo(int i){
+	return nodos[i];
 }

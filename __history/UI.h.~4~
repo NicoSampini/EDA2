@@ -1,0 +1,34 @@
+//---------------------------------------------------------------------------
+
+#ifndef UIH
+#define UIH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.Forms.hpp>
+#include <Vcl.ExtCtrls.hpp>
+//---------------------------------------------------------------------------
+#include "Grafo.h"
+
+class TInterfazGrafica : public TForm
+{
+__published:	// IDE-managed Components
+	TComboBox *OrigenCB;
+	TComboBox *DestinoCB;
+	TButton *BtnBuscar;
+	TButton *BtnSalir;
+	TImage *Image1;
+	TLabel *Titulo;
+	TLabel *TituloDatos;
+	void __fastcall BtnSalirClick(TObject *Sender);
+	void __fastcall BtnBuscarClick(TObject *Sender);
+private:	// User declarations
+    Grafo g;
+public:		// User declarations
+	__fastcall TInterfazGrafica(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TInterfazGrafica *InterfazGrafica;
+//---------------------------------------------------------------------------
+#endif

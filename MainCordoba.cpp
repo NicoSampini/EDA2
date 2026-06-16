@@ -1,14 +1,15 @@
 #include <iostream>
+#pragma hdrstop
 #include <tchar.h>
 
 #include "DatosIniciales.h"
 #include "Grafo.h"
 #include "Menu.h"
 
-using namespace std;
+ using namespace std;
 
 int _tmain(int argc, _TCHAR* argv[])
-{
+ {
     Grafo g;
     int opcion;
 
@@ -27,3 +28,5 @@ int _tmain(int argc, _TCHAR* argv[])
 
     return 0;
 }
+
+

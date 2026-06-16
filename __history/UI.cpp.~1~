@@ -1,0 +1,24 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "UI.h"
+#include "Grafo.h"
+#include "DatosIniciales.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TInterfazGrafica *InterfazGrafica;
+
+//---------------------------------------------------------------------------
+__fastcall TInterfazGrafica::TInterfazGrafica(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+void __fastcall TInterfazGrafica::Button1Click(TObject *Sender)
+{
+    g.mostrarNodos()
+}
+//---------------------------------------------------------------------------
