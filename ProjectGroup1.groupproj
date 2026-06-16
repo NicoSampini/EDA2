@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{784C61AE-EE0F-49E7-81B1-920FDF8B253D}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ProjectCordoba.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ProyectoCordobaUI.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ProjectCordoba">
+        <MSBuild Projects="ProjectCordoba.cbproj"/>
+    </Target>
+    <Target Name="ProjectCordoba:Clean">
+        <MSBuild Projects="ProjectCordoba.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProjectCordoba:Make">
+        <MSBuild Projects="ProjectCordoba.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="ProyectoCordobaUI">
+        <MSBuild Projects="ProyectoCordobaUI.cbproj"/>
+    </Target>
+    <Target Name="ProyectoCordobaUI:Clean">
+        <MSBuild Projects="ProyectoCordobaUI.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProyectoCordobaUI:Make">
+        <MSBuild Projects="ProyectoCordobaUI.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ProjectCordoba;ProyectoCordobaUI"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ProjectCordoba:Clean;ProyectoCordobaUI:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ProjectCordoba:Make;ProyectoCordobaUI:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

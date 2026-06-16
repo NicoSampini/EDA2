@@ -202,6 +202,6 @@ void Grafo::consultarDistancia(int origen, int destino)
     }
 }
 
-std::string Grafo::enviarNombres(int i){
+Nodo Grafo::enviarNodo(int i){
 	return nodos[i];
 }

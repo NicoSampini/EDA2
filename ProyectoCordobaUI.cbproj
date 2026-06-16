@@ -179,6 +179,12 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
     </PropertyGroup>
     <ItemGroup>
+        <CppCompile Include="DatosIniciales.cpp">
+            <BuildOrder>4</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Grafo.cpp">
+            <BuildOrder>3</BuildOrder>
+        </CppCompile>
         <CppCompile Include="ProyectoCordobaUI.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>

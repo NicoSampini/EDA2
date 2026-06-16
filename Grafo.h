@@ -1,6 +1,8 @@
 #ifndef GRAFO_H
 #define GRAFO_H
 
+#include <string>
+
 #include "Nodo.h"
 
 #define NODOS_CANTIDAD 8
@@ -23,6 +25,8 @@ public:
     void mostrarMatriz();
     void mostrarConexionesDeNodo(int id);
     void consultarDistancia(int origen, int destino);
+
+    Nodo enviarNodo(int i);
 };
 
 #endif

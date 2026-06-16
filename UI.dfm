@@ -12,28 +12,28 @@ object InterfazGrafica: TInterfazGrafica
   Font.Style = []
   TextHeight = 15
   object Image1: TImage
-    Left = 168
-    Top = 56
+    Left = 159
+    Top = 51
     Width = 689
     Height = 521
   end
   object Titulo: TLabel
     Left = 416
     Top = 8
-    Width = 167
-    Height = 30
+    Width = 216
+    Height = 37
     Caption = 'Mapa de Cordoba'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = 30
+    Font.Height = -27
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
   end
   object TituloDatos: TLabel
-    Left = 912
-    Top = 8
-    Width = 47
+    Left = 904
+    Top = 18
+    Width = 49
     Height = 25
     Caption = 'Datos'
     Font.Charset = DEFAULT_CHARSET
@@ -78,13 +78,5 @@ object InterfazGrafica: TInterfazGrafica
     Caption = 'Salir'
     TabOrder = 3
     OnClick = BtnSalirClick
-  end
-  object DatosText: TStaticText
-    Left = 912
-    Top = 96
-    Width = 56
-    Height = 19
-    Caption = 'DatosText'
-    TabOrder = 4
   end
 end

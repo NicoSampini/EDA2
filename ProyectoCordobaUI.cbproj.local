@@ -12,8 +12,10 @@
     <Transaction>2026/06/15 17:54:10.949,C:\Users\NoxiePC\Documents\Programacion\EDA2\Unit1.cpp=C:\Users\NoxiePC\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
     <Transaction>2026/06/15 17:54:10.949,C:\Users\NoxiePC\Documents\Programacion\EDA2\Unit1.h=C:\Users\NoxiePC\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.h</Transaction>
     <Transaction>2026/06/15 17:54:11.017,C:\Users\NoxiePC\Documents\Programacion\EDA2\ProyectoCordobaUI.cbproj=C:\Users\NoxiePC\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1.cbproj</Transaction>
-    <Transaction>2026/06/15 17:54:50.494,C:\Users\NoxiePC\Documents\Programacion\EDA2\UI.h=C:\Users\NoxiePC\Documents\Programacion\EDA2\Unit1.h</Transaction>
     <Transaction>2026/06/15 17:54:50.494,C:\Users\NoxiePC\Documents\Programacion\EDA2\UI.cpp=C:\Users\NoxiePC\Documents\Programacion\EDA2\Unit1.cpp</Transaction>
     <Transaction>2026/06/15 17:54:50.494,C:\Users\NoxiePC\Documents\Programacion\EDA2\UI.dfm=C:\Users\NoxiePC\Documents\Programacion\EDA2\Unit1.dfm</Transaction>
+    <Transaction>2026/06/15 17:54:50.494,C:\Users\NoxiePC\Documents\Programacion\EDA2\UI.h=C:\Users\NoxiePC\Documents\Programacion\EDA2\Unit1.h</Transaction>
+    <Transaction>2026/06/15 18:00:19.655,=C:\Users\NoxiePC\Documents\Programacion\EDA2\Grafo.cpp</Transaction>
+    <Transaction>2026/06/15 18:00:53.772,=C:\Users\NoxiePC\Documents\Programacion\EDA2\DatosIniciales.cpp</Transaction>
   </Transactions>
 </BorlandProject>

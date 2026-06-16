@@ -19,7 +19,6 @@ __published:	// IDE-managed Components
 	TButton *BtnBuscar;
 	TButton *BtnSalir;
 	TImage *Image1;
-	TStaticText *DatosText;
 	TLabel *Titulo;
 	TLabel *TituloDatos;
 	void __fastcall BtnSalirClick(TObject *Sender);
