@@ -143,6 +143,7 @@
         <None Include="Grafo.h">
             <BuildOrder>0</BuildOrder>
         </None>
+        <None Include="GrafoBinario.bin"/>
         <CppCompile Include="MainCordoba.cpp">
             <BuildOrder>1</BuildOrder>
         </CppCompile>
@@ -262,6 +263,12 @@
                 <DeployFile LocalName=".\Win32\Release\ProjectCordoba.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>ProjectCordoba.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="GrafoBinario.bin" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

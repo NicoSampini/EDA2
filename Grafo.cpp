@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <climits>
 #include <string>
 
 #include "Grafo.h"
@@ -49,34 +50,34 @@ void Grafo::cortarORestaurarConexion(int a, int b)
 {
     if (a < 0 || a >= NODOS_CANTIDAD || b < 0 || b >= NODOS_CANTIDAD)
     {
-        cout << "Uno de los IDs ingresados no es valido." << endl;
+        //cout << "Uno de los IDs ingresados no es valido." << endl;
         return;
     }
 
     if (a == b)
     {
-        cout << "No se puede cortar una conexion de un nodo hacia si mismo." << endl;
+        //cout << "No se puede cortar una conexion de un nodo hacia si mismo." << endl;
         return;
     }
 
     if (matriz[a][b] == -1)
     {
-        cout << "No existe una conexion directa entre ";
-        cout << nodos[a].nombre << " y " << nodos[b].nombre << "." << endl;
+        //cout << "No existe una conexion directa entre ";
+        //cout << nodos[a].nombre << " y " << nodos[b].nombre << "." << endl;
         return;
     }
 
     matriz[a][b] = matriz[a][b] * -1;
     matriz[b][a] = matriz[b][a] * -1;
 
-    if (matriz[a][b] < -1)
-    {
-        cout << "La conexion fue cortada temporalmente." << endl;
-    }
-    else
-    {
-        cout << "La conexion fue restaurada." << endl;
-    }
+    //if (matriz[a][b] < -1)
+    //{
+        //cout << "La conexion fue cortada temporalmente." << endl;
+    //}
+    //else
+    //{
+        //cout << "La conexion fue restaurada." << endl;
+    //}
 }
 
 int Grafo::verSiConexionActiva(int a, int b)
@@ -206,6 +207,141 @@ int Grafo::consultarDistancia(int origen, int destino)
     }
 }
 
+int Grafo::dijkstra(int origen, int destino, int arrayNuevo[])
+{
+
+    if (origen < 0 || origen >= NODOS_CANTIDAD)
+    {
+        //cout << "ID de origen invalida" << endl;
+        return 0;
+    }
+
+    if (destino < 0 || destino >= NODOS_CANTIDAD)
+    {
+        //cout << "ID de destino invalida" << endl;
+        return 0;
+    }
+
+    if (origen == destino)
+    {
+        //cout << "El origen y destino no pueden ser iguales" << endl;
+        return 0;
+    }
+
+    int distancias[NODOS_CANTIDAD];
+    bool visitado[NODOS_CANTIDAD];
+    int anterior[NODOS_CANTIDAD];
+    int nodoActual = origen;
+
+    for (int i = 0; i < NODOS_CANTIDAD; i++)
+    {
+        distancias[i] = INT_MAX;
+        visitado[i] = false;
+        anterior[i] = -1;
+    }
+
+    distancias[nodoActual] = 0;
+
+    int changed = 1;
+
+    while (changed == 1)
+    {
+        changed = 0;
+        visitado[nodoActual] = true;
+        for (int i = 0; i < NODOS_CANTIDAD; i++)
+        {
+            if (matriz[nodoActual][i] > 0 &&
+                distancias[nodoActual] + matriz[nodoActual][i] < distancias[i])
+            {
+                distancias[i] =
+                    distancias[nodoActual] + matriz[nodoActual][i];
+
+                anterior[i] = nodoActual;
+            }
+        }
+
+        int distanciaMinima = INT_MAX;
+
+        for (int i = 0; i < NODOS_CANTIDAD; i++)
+        {
+            if (!visitado[i] && distancias[i] < distanciaMinima)
+            {
+                nodoActual = i;
+                distanciaMinima = distancias[i];
+                changed = 1;
+            }
+        }
+
+        if (nodoActual == destino)
+        {
+            changed = 0;
+
+            //cout << endl;
+            //cout << "======================================" << endl;
+            //cout << "MEJOR RUTA DESDE "
+                 //<< nodos[origen].nombre
+                 //<< " HASTA "
+                 //<< nodos[destino].nombre
+                 //<< endl;
+
+            //cout << "DISTANCIA TOTAL: "
+                 //<< distancias[destino]
+                 //<< " km"
+                 //<< endl;
+
+            //cout << "======================================" << endl;
+
+            int camino[NODOS_CANTIDAD];
+            int cantidad = 0;
+
+            int actual = destino;
+
+            while (actual != -1)
+            {
+                arrayNuevo[cantidad] = actual;
+                cantidad++;
+
+                actual = anterior[actual];
+
+            }
+            for (int i = 0; i < cantidad / 2; i++)
+			{
+            	int temp = arrayNuevo[i];
+            	arrayNuevo[i] = arrayNuevo[cantidad - 1 - i];
+    			arrayNuevo[cantidad - 1 - i] = temp;
+			}
+            return cantidad;
+            //cout << endl;
+            //cout << "RECORRIDO:" << endl;
+            //cout << endl;
+        }
+        else if (changed == 0)
+        {
+            return 0;
+        }
+    }
+}
+
 Nodo Grafo::enviarNodo(int i){
 	return nodos[i];
+}
+
+void Grafo::guardarMatriz(const char archivo[])
+{
+    FILE *f = fopen("GrafoBinario.bin", "wb");
+    if (f == NULL) return;
+
+    fwrite(matriz, sizeof(int), NODOS_CANTIDAD * NODOS_CANTIDAD, f);
+
+    fclose(f);
+}
+
+void Grafo::cargarMatriz(const char archivo[])
+{
+    FILE *f = fopen("GrafoBinario.bin", "rb");
+    if (f == NULL) return;
+
+    fread(matriz, sizeof(int), NODOS_CANTIDAD * NODOS_CANTIDAD, f);
+
+    fclose(f);
 }

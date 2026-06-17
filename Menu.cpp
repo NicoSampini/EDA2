@@ -67,6 +67,19 @@ void ejecutarOpcion(Grafo &g, int opcion)
         g.cortarORestaurarConexion(origen, destino);
         break;
     }
+    case 6:
+    {
+        int origen, destino;
+        g.mostrarNodos();
+        cout << endl;
+        cout << "Ingrese ID de origen: ";
+        cin >> origen;
+        cout << "Ingrese ID de destino: ";
+        cin >> destino;
+        g.dijkstra(origen, destino);
+        break;
+    }
+
 
     case 6:
     {

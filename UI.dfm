@@ -11,34 +11,6 @@ object InterfazGrafica: TInterfazGrafica
   Font.Name = 'Segoe UI'
   Font.Style = []
   TextHeight = 15
-  object Titulo: TLabel
-    Left = 416
-    Top = 8
-    Width = 216
-    Height = 37
-    Caption = 'Mapa de Cordoba'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -27
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-  end
-  object TituloDatos: TLabel
-    Left = 912
-    Top = 18
-    Width = 47
-    Height = 25
-    Caption = 'Datos'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = 25
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    Transparent = True
-    Visible = False
-  end
   object ImageMapa: TImage
     Left = 304
     Top = 51
@@ -1253,38 +1225,101 @@ object InterfazGrafica: TInterfazGrafica
       A0FFD9}
     Stretch = True
   end
+  object RioTercero: TLabel
+    Left = 432
+    Top = 288
+    Width = 58
+    Height = 15
+    Caption = 'Rio Tercero'
+    Layout = tlCenter
+  end
+  object Titulo: TLabel
+    Left = 416
+    Top = 8
+    Width = 216
+    Height = 37
+    Caption = 'Mapa de Cordoba'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object TituloDatos: TLabel
+    Left = 904
+    Top = 20
+    Width = 47
+    Height = 25
+    Caption = 'Datos'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = 25
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    Transparent = False
+    Visible = False
+  end
+  object BellVille: TLabel
+    Left = 516
+    Top = 344
+    Width = 44
+    Height = 15
+    Caption = 'Bell Ville'
+  end
   object OrigenCB: TComboBox
     Left = 8
     Top = 51
-    Width = 193
+    Width = 216
     Height = 23
     TabOrder = 0
     Text = 'Origen'
   end
   object DestinoCB: TComboBox
     Left = 8
-    Top = 112
-    Width = 193
+    Top = 104
+    Width = 216
     Height = 23
     TabOrder = 1
     Text = 'Destino'
   end
   object BtnBuscar: TButton
-    Left = 56
+    Left = 8
     Top = 152
-    Width = 97
-    Height = 25
+    Width = 105
+    Height = 33
     Caption = 'Buscar'
     TabOrder = 2
     OnClick = BtnBuscarClick
   end
   object BtnSalir: TButton
-    Left = 32
+    Left = 40
     Top = 560
     Width = 145
     Height = 33
     Caption = 'Salir'
     TabOrder = 3
     OnClick = BtnSalirClick
+  end
+  object CortarRutaBtn: TButton
+    Left = 119
+    Top = 152
+    Width = 105
+    Height = 33
+    Caption = 'Cortar/restaurar ruta'
+    TabOrder = 4
+    WordWrap = True
+    OnClick = CortarRutaBtnClick
+  end
+  object MemoDatos: TMemo
+    Left = 800
+    Top = 51
+    Width = 257
+    Height = 190
+    Lines.Strings = (
+      '')
+    ReadOnly = True
+    TabOrder = 5
   end
 end
