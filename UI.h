@@ -10,6 +10,7 @@
 #include <Vcl.ExtCtrls.hpp>
 //---------------------------------------------------------------------------
 #include "Grafo.h"
+#include "Rutas.h"
 #include <Vcl.Imaging.jpeg.hpp>
 
 class TInterfazGrafica : public TForm
@@ -22,14 +23,26 @@ __published:	// IDE-managed Components
 	TLabel *Titulo;
 	TLabel *TituloDatos;
 	TImage *ImageMapa;
+	TButton *CortarRutaBtn;
+	TButton *BtnBorrar;
+	TLabel *RioTercero;
+	TLabel *BellVille;
+	TMemo *MemoDatos;
 	void __fastcall BtnSalirClick(TObject *Sender);
 	void __fastcall BtnBuscarClick(TObject *Sender);
+	void __fastcall CortarRutaBtnClick(TObject *Sender);
+	void __fastcall BtnBorrarClick(TObject *Sender);
 
 private:	// User declarations
     Grafo g;
+    Rutas r;
 public:		// User declarations
 	__fastcall TInterfazGrafica(TComponent* Owner);
-    void DibujarMapa();
+    void DibujarMapa(char color, int destino1, int destino2);
+    void VerCortarRutas();
+    void CargarCombo();
+    void CargarRutas();
+    void LimpiarMapa();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TInterfazGrafica *InterfazGrafica;

@@ -14,6 +14,7 @@ void mostrarMenu()
     cout << "3. Ver conexiones de un nodo" << endl;
     cout << "4. Consultar distancia entre dos nodos" << endl;
     cout << "5. Cortar o restaurar una conexion" << endl;
+    cout << "6. Dijsktra" << endl;
     cout << "0. Salir" << endl;
     cout << "Opcion: ";
 }
@@ -66,6 +67,19 @@ void ejecutarOpcion(Grafo &g, int opcion)
         g.cortarORestaurarConexion(origen, destino);
         break;
     }
+    case 6:
+    {
+        int origen, destino;
+        g.mostrarNodos();
+        cout << endl;
+        cout << "Ingrese ID de origen: ";
+        cin >> origen;
+        cout << "Ingrese ID de destino: ";
+        cin >> destino;
+        g.dijkstra(origen, destino);
+        break;
+    }
+
 
     case 0:
         cout << "Saliendo del sistema..." << endl;

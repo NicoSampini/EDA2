@@ -1,6 +1,7 @@
 #ifndef GRAFO_H
 #define GRAFO_H
 
+
 #include <string>
 
 #include "Nodo.h"
@@ -25,6 +26,7 @@ public:
     void mostrarMatriz();
     void mostrarConexionesDeNodo(int id);
     int consultarDistancia(int origen, int destino);
+    int dijkstra(int origen, int destino, int arrayNuevo[]);
 
     Nodo enviarNodo(int i);
 };
