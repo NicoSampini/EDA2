@@ -81,6 +81,19 @@ void ejecutarOpcion(Grafo &g, int opcion)
     }
 
 
+    case 6:
+    {
+        int origen, destino;
+        g.mostrarNodos();
+        cout << endl;
+        cout << "Ingrese ID de origen: ";
+        cin >> origen;
+        cout << "Ingrese ID de destino: ";
+        cin >> destino;
+        g.dijkstra(origen, destino);
+        break;
+    }
+
     case 0:
         cout << "Saliendo del sistema..." << endl;
         break;
