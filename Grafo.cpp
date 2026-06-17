@@ -50,34 +50,34 @@ void Grafo::cortarORestaurarConexion(int a, int b)
 {
     if (a < 0 || a >= NODOS_CANTIDAD || b < 0 || b >= NODOS_CANTIDAD)
     {
-        cout << "Uno de los IDs ingresados no es valido." << endl;
+        //cout << "Uno de los IDs ingresados no es valido." << endl;
         return;
     }
 
     if (a == b)
     {
-        cout << "No se puede cortar una conexion de un nodo hacia si mismo." << endl;
+        //cout << "No se puede cortar una conexion de un nodo hacia si mismo." << endl;
         return;
     }
 
     if (matriz[a][b] == -1)
     {
-        cout << "No existe una conexion directa entre ";
-        cout << nodos[a].nombre << " y " << nodos[b].nombre << "." << endl;
+        //cout << "No existe una conexion directa entre ";
+        //cout << nodos[a].nombre << " y " << nodos[b].nombre << "." << endl;
         return;
     }
 
     matriz[a][b] = matriz[a][b] * -1;
     matriz[b][a] = matriz[b][a] * -1;
 
-    if (matriz[a][b] < -1)
-    {
-        cout << "La conexion fue cortada temporalmente." << endl;
-    }
-    else
-    {
-        cout << "La conexion fue restaurada." << endl;
-    }
+    //if (matriz[a][b] < -1)
+    //{
+        //cout << "La conexion fue cortada temporalmente." << endl;
+    //}
+    //else
+    //{
+        //cout << "La conexion fue restaurada." << endl;
+    //}
 }
 
 int Grafo::verSiConexionActiva(int a, int b)
@@ -301,7 +301,6 @@ int Grafo::dijkstra(int origen, int destino, int arrayNuevo[])
                 arrayNuevo[cantidad] = actual;
                 cantidad++;
 
-                //ShowMessage("actual = " + IntToStr(actual));
                 actual = anterior[actual];
 
             }
@@ -325,4 +324,24 @@ int Grafo::dijkstra(int origen, int destino, int arrayNuevo[])
 
 Nodo Grafo::enviarNodo(int i){
 	return nodos[i];
+}
+
+void Grafo::guardarMatriz(const char archivo[])
+{
+    FILE *f = fopen("GrafoBinario.bin", "wb");
+    if (f == NULL) return;
+
+    fwrite(matriz, sizeof(int), NODOS_CANTIDAD * NODOS_CANTIDAD, f);
+
+    fclose(f);
+}
+
+void Grafo::cargarMatriz(const char archivo[])
+{
+    FILE *f = fopen("GrafoBinario.bin", "rb");
+    if (f == NULL) return;
+
+    fread(matriz, sizeof(int), NODOS_CANTIDAD * NODOS_CANTIDAD, f);
+
+    fclose(f);
 }

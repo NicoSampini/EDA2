@@ -196,10 +196,6 @@
             <BuildOrder>1</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
-        <CppCompile Include="Rutas.cpp">
-            <DependentOn>Rutas.h</DependentOn>
-            <BuildOrder>6</BuildOrder>
-        </CppCompile>
         <CppCompile Include="UI.cpp">
             <Form>InterfazGrafica</Form>
             <FormType>dfm</FormType>

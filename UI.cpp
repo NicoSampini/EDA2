@@ -16,17 +16,19 @@ int camino[NODOS_CANTIDAD];
 __fastcall TInterfazGrafica::TInterfazGrafica(TComponent* Owner)
 	: TForm(Owner)
 {
-    LimpiarMapa();
-    CargarRutas();
-
-
     cargarDatosIniciales(g);
+    g.cargarMatriz("matriz.dat");
+    LimpiarMapa();
+    InicializarMapa();
+
+
     CargarCombo();
 }
 
 //---------------------------------------------------------------------------
 void __fastcall TInterfazGrafica::BtnSalirClick(TObject *Sender)
 {
+	g.guardarMatriz("matriz.dat");
     Close();
 }
 //---------------------------------------------------------------------------
@@ -34,33 +36,43 @@ void __fastcall TInterfazGrafica::BtnBuscarClick(TObject *Sender)
 {
     int origen = OrigenCB->ItemIndex;
     int destino = DestinoCB->ItemIndex;
-    int estadoConexion = g.verSiConexionActiva(origen, destino);
 
     MemoDatos->Lines->Clear();
 
     if (origen == -1 || destino == -1) {
-       return;
+        MemoDatos->Lines->Add("Seleccione origen y destino.");
+        return;
     }
+
+    if (origen == destino) {
+        MemoDatos->Lines->Add("El origen y destino no pueden ser iguales.");
+        return;
+    }
+
+    LimpiarMapa();
+    InicializarMapa();
 
     int cant = g.dijkstra(origen, destino, camino);
 
-
-     if(estadoConexion == 0){
-        DibujarMapa('r', origen, destino);
-        g.consultarDistancia(origen, destino);
-    }
-    else{
-       for(int i = 0 ; i < cant - 1; i++)
-        {
-            DibujarMapa('b', camino[i], camino[i + 1]);
-        }
-        MemoDatos->Lines->Add("Distancia: " +  IntToStr(g.consultarDistancia(origen, destino)) + "km");
+    if (cant == 0) {
+        MemoDatos->Lines->Add("No hay camino posible entre");
+        MemoDatos->Lines->Add(g.enviarNodo(origen).nombre);
+        MemoDatos->Lines->Add("y");
+        MemoDatos->Lines->Add(g.enviarNodo(destino).nombre);
+        return;
     }
 
-    g.consultarDistancia(origen, destino);
-    r.ActualizarRuta(origen, destino, 1);
+    int distanciaTotal = 0;
+    for (int i = 0; i < cant - 1; i++) {
+        distanciaTotal += g.consultarDistancia(camino[i], camino[i+1]);
+        DibujarMapa('a', camino[i], camino[i+1]);
+    }
 
-
+    MemoDatos->Lines->Add("Distancia total: " + IntToStr(distanciaTotal) + " km");
+    MemoDatos->Lines->Add("Recorrido:");
+    for (int i = 0; i < cant; i++) {
+        MemoDatos->Lines->Add("  " + String(g.enviarNodo(camino[i]).nombre));
+    }
 }
 //---------------------------------------------------------------------------
 
@@ -68,8 +80,36 @@ void __fastcall TInterfazGrafica::CortarRutaBtnClick(TObject *Sender)
 {
     int origen = OrigenCB->ItemIndex;
     int destino = DestinoCB->ItemIndex;
-  	g.cortarORestaurarConexion(origen, destino);
-    CargarRutas();
+
+    if (origen == -1 || destino == -1) {
+        MemoDatos->Lines->Add("Seleccione origen y destino.");
+        return;
+    }
+
+    int estado = g.verSiConexionActiva(origen, destino);
+
+    if (estado == -1) {
+        MemoDatos->Lines->Clear();
+        MemoDatos->Lines->Add("No existe conexion directa entre");
+        MemoDatos->Lines->Add(g.enviarNodo(origen).nombre);
+        MemoDatos->Lines->Add("y");
+        MemoDatos->Lines->Add(g.enviarNodo(destino).nombre);
+        return;
+    }
+
+    g.cortarORestaurarConexion(origen, destino);
+    LimpiarMapa();
+    InicializarMapa();
+
+    MemoDatos->Lines->Clear();
+    if (estado == 1) {
+        MemoDatos->Lines->Add("Ruta cortada entre");
+    } else {
+        MemoDatos->Lines->Add("Ruta restaurada entre");
+    }
+    MemoDatos->Lines->Add(g.enviarNodo(origen).nombre);
+    MemoDatos->Lines->Add("y");
+    MemoDatos->Lines->Add(g.enviarNodo(destino).nombre);
 }
 //---------------------------------------------------------------------------
 void TInterfazGrafica::CargarCombo(){
@@ -81,17 +121,29 @@ void TInterfazGrafica::CargarCombo(){
 }
 //---------------------------------------------------------------------------
 
-void TInterfazGrafica::CargarRutas(){
-   for (int i = 0; i < RUTAS_CANTIDAD; i++) {
-       for (int j = 0; j < RUTAS_CANTIDAD; j++) {
-            if(r.ConsultarRuta(i, j) == 1 && g.verSiConexionActiva(i, j) == 1){
-               DibujarMapa('b', i, j);
+void TInterfazGrafica::InicializarMapa(){
+    TCanvas *canvas = ImageMapa->Canvas;
+    canvas->Pen->Width = 3;
+
+    for (int i = 0; i < NODOS_CANTIDAD; i++) {
+        for (int j = i + 1; j < NODOS_CANTIDAD; j++) {
+
+            int conexion = g.verSiConexionActiva(i, j);
+
+            if (conexion == 1) {
+                canvas->Pen->Color = clBlack;
+            } else if (conexion == 0) {
+                canvas->Pen->Color = clRed;
+            } else {
+                continue;
             }
-            else if(r.ConsultarRuta(i, j) == 1 && g.verSiConexionActiva(i, j) == 0) {
-               DibujarMapa('r', i, j);
-            }
-       }
-   }
+
+            Nodo a = g.enviarNodo(i);
+            Nodo b = g.enviarNodo(j);
+            canvas->MoveTo(a.xPX, a.yPX);
+            canvas->LineTo(b.xPX, b.yPX);
+        }
+    }
 }
 //---------------------------------------------------------------------------
 
@@ -100,15 +152,14 @@ void TInterfazGrafica::DibujarMapa(char color, int destino1, int destino2){
     TCanvas *canvas = ImageMapa-> Canvas;
 
 
-    if(color == 'b'){
-    	canvas->Pen->Color = clBlue;
-    }
-    else if(color == 'r') {
-      canvas->Pen->Color = clRed;
-    }
-    else{
-        return;
-    }
+     if (color == 'a') {
+        canvas->Pen->Color = clBlue;
+     }else if(color == 'r'){
+        canvas->Pen->Color = clRed;
+     }else{
+     	canvas->Pen->Color = clBlack;
+     }
+
     canvas->Pen->Width = 3;
 
     Nodo a = g.enviarNodo(destino1);
@@ -128,14 +179,6 @@ void TInterfazGrafica::LimpiarMapa(){
     bmp->Canvas->Draw(0, 0, ImageMapa->Picture->Graphic);
     ImageMapa->Picture->Assign(bmp);
     delete bmp;
-}
-void __fastcall TInterfazGrafica::BtnBorrarClick(TObject *Sender)
-{
-    int origen = OrigenCB->ItemIndex;
-    int destino = DestinoCB->ItemIndex;
-    r.ActualizarRuta(origen, destino, -1);
-    LimpiarMapa();
-    CargarRutas();
 }
 //---------------------------------------------------------------------------
 

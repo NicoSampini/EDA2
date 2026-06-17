@@ -9,10 +9,12 @@ Rutas::Rutas(){
     {
         for (int j = 0; j < RUTAS_CANTIDAD; j++)
         {
-            if (i == j)
+            if (i == j){
                 matrizRutas[i][j] = 0;
-            else
+            }
+            else{
                 matrizRutas[i][j] = -1;
+            }
         }
     }
 }

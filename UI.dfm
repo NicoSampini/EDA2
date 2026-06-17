@@ -1258,7 +1258,7 @@ object InterfazGrafica: TInterfazGrafica
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
-    Transparent = True
+    Transparent = False
     Visible = False
   end
   object BellVille: TLabel
@@ -1294,7 +1294,7 @@ object InterfazGrafica: TInterfazGrafica
     OnClick = BtnBuscarClick
   end
   object BtnSalir: TButton
-    Left = 32
+    Left = 40
     Top = 560
     Width = 145
     Height = 33
@@ -1312,15 +1312,6 @@ object InterfazGrafica: TInterfazGrafica
     WordWrap = True
     OnClick = CortarRutaBtnClick
   end
-  object BtnBorrar: TButton
-    Left = 64
-    Top = 191
-    Width = 105
-    Height = 33
-    Caption = 'Borrar'
-    TabOrder = 5
-    OnClick = BtnBorrarClick
-  end
   object MemoDatos: TMemo
     Left = 800
     Top = 51
@@ -1329,6 +1320,6 @@ object InterfazGrafica: TInterfazGrafica
     Lines.Strings = (
       '')
     ReadOnly = True
-    TabOrder = 6
+    TabOrder = 5
   end
 end

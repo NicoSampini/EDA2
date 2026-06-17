@@ -9,11 +9,12 @@
     <Transaction>2026/05/26 11:46:29.000.760,C:\Users\vboxuser\Desktop\Estructura 2\EDA2\MainCordoba.cpp=C:\Users\vboxuser\Desktop\Estructura 2\EDA2\File1.cpp</Transaction>
     <Transaction>2026/05/26 11:46:33.000.758,C:\Users\vboxuser\Desktop\Estructura 2\EDA2\ProjectCordoba.cbproj=C:\Users\vboxuser\Desktop\Estructura 2\EDA2\ProjectCordoba.cbproj</Transaction>
     <Transaction>2026/06/15 13:56:20.000.389,=C:\Users\NoxiePC\Documents\Programacion\EDA2\InterfazGrafica.cpp</Transaction>
-    <Transaction>2026/06/15 13:56:20.000.456,=C:\Users\NoxiePC\Documents\Programacion\EDA2\InterfazGrafica.h</Transaction>
     <Transaction>2026/06/15 13:56:20.000.453,=C:\Users\NoxiePC\Documents\Programacion\EDA2\InterfazGrafica.dfm</Transaction>
+    <Transaction>2026/06/15 13:56:20.000.456,=C:\Users\NoxiePC\Documents\Programacion\EDA2\InterfazGrafica.h</Transaction>
     <Transaction>2026/06/15 13:56:48.000.511,C:\Users\NoxiePC\Documents\Programacion\EDA2\InterfazGrafica.dfm=</Transaction>
     <Transaction>2026/06/15 13:56:52.000.647,C:\Users\NoxiePC\Documents\Programacion\EDA2\InterfazGrafica.h=</Transaction>
     <Transaction>2026/06/16 00:22:54.000.417,C:\Users\NoxiePC\Documents\Programacion\EDA2\InterfazGrafica.cpp=</Transaction>
+    <Transaction>2026/06/17 09:50:22.388,=C:\Users\NoxiePC\Documents\Programacion\EDA2\GrafoBinario.bin</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="DatosIniciales.cpp"/>
@@ -25,5 +26,6 @@
     <File Path="Menu.h"/>
     <File Path="Nodo.h"/>
     <File Path="ProjectCordobaPCH1.h"/>
+    <File Path="GrafoBinario.bin"/>
   </ProjectSortOrder>
 </BorlandProject>

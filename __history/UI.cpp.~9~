@@ -1,0 +1,145 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "UI.h"
+#include "Grafo.h"
+#include "Rutas.h"
+#include "DatosIniciales.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TInterfazGrafica *InterfazGrafica;
+int camino[NODOS_CANTIDAD];
+//---------------------------------------------------------------------------
+__fastcall TInterfazGrafica::TInterfazGrafica(TComponent* Owner)
+	: TForm(Owner)
+{
+    cargarDatosIniciales(g);
+    LimpiarMapa();
+    InicializarMapa();
+
+
+    CargarCombo();
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TInterfazGrafica::BtnSalirClick(TObject *Sender)
+{
+    Close();
+}
+//---------------------------------------------------------------------------
+void __fastcall TInterfazGrafica::BtnBuscarClick(TObject *Sender)
+{
+    int origen = OrigenCB->ItemIndex;
+    int destino = DestinoCB->ItemIndex;
+    int estadoConexion = g.verSiConexionActiva(origen, destino);
+
+    MemoDatos->Lines->Clear();
+
+    if (origen == -1 || destino == -1) {
+       return;
+    }
+
+    int cant = g.dijkstra(origen, destino, camino);
+
+
+	for(int i = 0 ; i < cant - 1; i++)
+    {
+    	DibujarMapa('b', camino[i], camino[i + 1]);
+    }
+    MemoDatos->Lines->Add("Distancia: " +  IntToStr(g.consultarDistancia(origen, destino)) + "km");
+
+    g.consultarDistancia(origen, destino);
+    //
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TInterfazGrafica::CortarRutaBtnClick(TObject *Sender)
+{
+    int origen = OrigenCB->ItemIndex;
+    int destino = DestinoCB->ItemIndex;
+  	g.cortarORestaurarConexion(origen, destino);
+    InicializarMapa();
+}
+//---------------------------------------------------------------------------
+void TInterfazGrafica::CargarCombo(){
+   for(int i = 0; i < NODOS_CANTIDAD; i++)
+    {
+    	OrigenCB->Items->Add(String(g.enviarNodo(i).nombre));
+        DestinoCB->Items->Add(String(g.enviarNodo(i).nombre));
+    }
+}
+//---------------------------------------------------------------------------
+
+void TInterfazGrafica::InicializarMapa(){
+    TCanvas *canvas = ImageMapa->Canvas;
+    canvas->Pen->Width = 3;
+
+    for (int i = 0; i < NODOS_CANTIDAD; i++) {
+        for (int j = i + 1; j < NODOS_CANTIDAD; j++) {
+
+            int conexion = g.consultarDistancia(i, j);
+
+            if (conexion > 0) {
+                canvas->Pen->Color = clBlack;
+            } else if (conexion < -1) {
+                canvas->Pen->Color = clRed;
+            } else {
+                continue; // -1: no existe conexión, no dibujar
+            }
+
+            Nodo a = g.enviarNodo(i);
+            Nodo b = g.enviarNodo(j);
+            canvas->MoveTo(a.xPX, a.yPX);
+            canvas->LineTo(b.xPX, b.yPX);
+        }
+    }
+}
+//---------------------------------------------------------------------------
+
+void TInterfazGrafica::DibujarMapa(char color, int destino1, int destino2){
+
+    TCanvas *canvas = ImageMapa-> Canvas;
+
+
+     if (color == 'a') {
+        canvas->Pen->Color = clBlue;
+     }else if(color == 'r'){
+        canvas->Pen->Color = clRed;
+     }else{
+     	canvas->Pen->Color = clBlack;
+     }
+
+    canvas->Pen->Width = 3;
+
+    Nodo a = g.enviarNodo(destino1);
+    Nodo b = g.enviarNodo(destino2);
+
+    canvas->MoveTo(a.xPX, a.yPX);
+	canvas->LineTo(b.xPX, b.yPX);
+
+}
+//---------------------------------------------------------------------------
+void TInterfazGrafica::LimpiarMapa(){
+    ImageMapa->Picture->LoadFromFile("mapaCordoba3.jpg");
+
+    Graphics::TBitmap *bmp = new Graphics::TBitmap();
+    bmp->Width  = ImageMapa->Width;
+    bmp->Height = ImageMapa->Height;
+    bmp->Canvas->Draw(0, 0, ImageMapa->Picture->Graphic);
+    ImageMapa->Picture->Assign(bmp);
+    delete bmp;
+}
+void __fastcall TInterfazGrafica::BtnBorrarClick(TObject *Sender)
+{
+    int origen = OrigenCB->ItemIndex;
+    int destino = DestinoCB->ItemIndex;
+    //
+    LimpiarMapa();
+    InicializarMapa();
+}
+//---------------------------------------------------------------------------
+
