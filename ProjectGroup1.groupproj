@@ -3,9 +3,6 @@
         <ProjectGuid>{784C61AE-EE0F-49E7-81B1-920FDF8B253D}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="ProjectCordoba.cbproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="ProyectoCordobaUI.cbproj">
             <Dependencies/>
         </Projects>
@@ -17,15 +14,6 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="ProjectCordoba">
-        <MSBuild Projects="ProjectCordoba.cbproj"/>
-    </Target>
-    <Target Name="ProjectCordoba:Clean">
-        <MSBuild Projects="ProjectCordoba.cbproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ProjectCordoba:Make">
-        <MSBuild Projects="ProjectCordoba.cbproj" Targets="Make"/>
-    </Target>
     <Target Name="ProyectoCordobaUI">
         <MSBuild Projects="ProyectoCordobaUI.cbproj"/>
     </Target>
@@ -36,13 +24,13 @@
         <MSBuild Projects="ProyectoCordobaUI.cbproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="ProjectCordoba;ProyectoCordobaUI"/>
+        <CallTarget Targets="ProyectoCordobaUI"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="ProjectCordoba:Clean;ProyectoCordobaUI:Clean"/>
+        <CallTarget Targets="ProyectoCordobaUI:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="ProjectCordoba:Make;ProyectoCordobaUI:Make"/>
+        <CallTarget Targets="ProyectoCordobaUI:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

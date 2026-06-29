@@ -9,6 +9,7 @@ struct Nodo
     int y;
     int xPX;
     int yPX;
+    bool activo;
 };
 
 #endif

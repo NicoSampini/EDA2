@@ -78,8 +78,8 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
-        <DynamicRTL>true</DynamicRTL>
-        <UsePackages>true</UsePackages>
+        <DynamicRTL>false</DynamicRTL>
+        <UsePackages>false</UsePackages>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
         <FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
         <BCC_wpar>false</BCC_wpar>
@@ -94,8 +94,6 @@
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
         <UWP_CppLogo44>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_44.png</UWP_CppLogo44>
         <UWP_CppLogo150>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_150.png</UWP_CppLogo150>
-        <IncludePath>..\..\..\..\..\Documents\Programacion\EDA2\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\..\..\..\..\Documents\Programacion\EDA2\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>ProyectoCordobaUI</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
@@ -184,6 +182,12 @@
         </CppCompile>
         <CppCompile Include="Grafo.cpp">
             <BuildOrder>3</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="FormNodos.cpp">
+            <BuildOrder>5</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="FormConexiones.cpp">
+            <BuildOrder>6</BuildOrder>
         </CppCompile>
         <RcItem Include="mapaCordoba3.jpg">
             <ResourceType>RCDATA</ResourceType>
@@ -294,6 +298,12 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="mapaCordoba3.jpg" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="mapaCordoba3.jpg" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
