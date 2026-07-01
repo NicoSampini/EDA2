@@ -16,64 +16,6 @@
 TInterfazGrafica *InterfazGrafica;
 //---------------------------------------------------------------------------
 
-namespace
-{
-    const TColor COLOR_FONDO = TColor(0x00AAB2B8);  // #B8B2AA
-    const TColor COLOR_CAMPO = TColor(0x00F4F5F6);  // #F6F5F4
-    const TColor COLOR_TEXTO = TColor(0x002C2F31);  // #312F2C
-    const TColor COLOR_ACENTO = TColor(0x002C2F31); // #312F2C
-
-    void EstilizarControl(TControl *control)
-    {
-        if (TButton *boton = dynamic_cast<TButton*>(control))
-        {
-            boton->Font->Color = COLOR_TEXTO;
-            boton->Font->Name = "Segoe UI";
-            boton->Font->Size = 9;
-            boton->ParentFont = false;
-            return;
-        }
-
-        if (TComboBox *combo = dynamic_cast<TComboBox*>(control))
-        {
-            combo->Font->Color = COLOR_TEXTO;
-            combo->Font->Name = "Segoe UI";
-            combo->Color = COLOR_CAMPO;
-            combo->ParentFont = false;
-            return;
-        }
-
-        if (TMemo *memo = dynamic_cast<TMemo*>(control))
-        {
-            memo->Font->Color = COLOR_TEXTO;
-            memo->Font->Name = "Segoe UI";
-            memo->Color = COLOR_CAMPO;
-            memo->ParentFont = false;
-            return;
-        }
-
-        if (TLabel *label = dynamic_cast<TLabel*>(control))
-        {
-            label->Font->Color = COLOR_TEXTO;
-            label->ParentFont = false;
-        }
-    }
-
-    void EstilizarControles(TWinControl *contenedor)
-    {
-        for (int i = 0; i < contenedor->ControlCount; i++)
-        {
-            TControl *control = contenedor->Controls[i];
-            EstilizarControl(control);
-
-            if (TWinControl *hijo = dynamic_cast<TWinControl*>(control))
-            {
-                EstilizarControles(hijo);
-            }
-        }
-    }
-}
-
 int TInterfazGrafica::ObtenerIdSeleccionado(TComboBox *combo)
 {
     if (combo->ItemIndex == -1)
@@ -117,9 +59,6 @@ void TInterfazGrafica::CrearBotonesAdministrar()
     administrarConexiones->Height = 33;
     administrarConexiones->Caption = "Administrar conexiones";
     administrarConexiones->OnClick = BtnAdministrarConexionesClick;
-
-    EstilizarControl(administrarCiudades);
-    EstilizarControl(administrarConexiones);
 }
 
 void TInterfazGrafica::RefrescarDespuesDeAdministrar(const String &mensaje)
@@ -162,11 +101,6 @@ void guardarHistorial(Grafo &g, int origen, int destino, int distanciaTotal, int
 __fastcall TInterfazGrafica::TInterfazGrafica(TComponent* Owner)
 	: TForm(Owner)
 {
-    Color = COLOR_FONDO;
-    Font->Color = COLOR_TEXTO;
-    Titulo->Font->Color = COLOR_ACENTO;
-    TituloDatos->Font->Color = COLOR_ACENTO;
-
     cargarDatosIniciales(g);
     g.cargarNodos("nodos.dat");
     g.cargarMatriz("matriz.dat");
@@ -174,9 +108,6 @@ __fastcall TInterfazGrafica::TInterfazGrafica(TComponent* Owner)
     InicializarMapa();
 
     CrearBotonesAdministrar();
-    EstilizarControles(this);
-    Titulo->Font->Color = COLOR_ACENTO;
-    TituloDatos->Font->Color = COLOR_ACENTO;
     CargarCombo();
 }
 

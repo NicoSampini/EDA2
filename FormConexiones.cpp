@@ -6,72 +6,6 @@
 
 #pragma package(smart_init)
 
-namespace
-{
-    const TColor COLOR_FONDO = TColor(0x00AAB2B8); // #B8B2AA
-    const TColor COLOR_CAMPO = TColor(0x00F4F5F6); // #F6F5F4
-    const TColor COLOR_TEXTO = TColor(0x002C2F31); // #312F2C
-
-    void EstilizarControl(TControl *control)
-    {
-        if (TButton *boton = dynamic_cast<TButton*>(control))
-        {
-            boton->Font->Color = COLOR_TEXTO;
-            boton->Font->Name = "Segoe UI";
-            boton->ParentFont = false;
-            return;
-        }
-
-        if (TComboBox *combo = dynamic_cast<TComboBox*>(control))
-        {
-            combo->Color = COLOR_CAMPO;
-            combo->Font->Color = COLOR_TEXTO;
-            combo->Font->Name = "Segoe UI";
-            combo->ParentFont = false;
-            return;
-        }
-
-        if (TEdit *edit = dynamic_cast<TEdit*>(control))
-        {
-            edit->Color = COLOR_CAMPO;
-            edit->Font->Color = COLOR_TEXTO;
-            edit->Font->Name = "Segoe UI";
-            edit->ParentFont = false;
-            return;
-        }
-
-        if (TMemo *memo = dynamic_cast<TMemo*>(control))
-        {
-            memo->Color = COLOR_CAMPO;
-            memo->Font->Color = COLOR_TEXTO;
-            memo->Font->Name = "Segoe UI";
-            memo->ParentFont = false;
-            return;
-        }
-
-        if (TLabel *label = dynamic_cast<TLabel*>(control))
-        {
-            label->Font->Color = COLOR_TEXTO;
-            label->Font->Name = "Segoe UI";
-            label->ParentFont = false;
-        }
-    }
-
-    void EstilizarFormulario(TWinControl *contenedor)
-    {
-        for (int i = 0; i < contenedor->ControlCount; i++)
-        {
-            TControl *control = contenedor->Controls[i];
-            EstilizarControl(control);
-
-            if (TWinControl *hijo = dynamic_cast<TWinControl*>(control))
-            {
-                EstilizarFormulario(hijo);
-            }
-        }
-    }
-}
-
 __fastcall TFormConexiones::TFormConexiones(TComponent* Owner, Grafo *grafo)
     : TForm(Owner, 0)
 {
@@ -83,9 +17,6 @@ __fastcall TFormConexiones::TFormConexiones(TComponent* Owner, Grafo *grafo)
     Height = 380;
     Position = poOwnerFormCenter;
     BorderStyle = bsDialog;
-    Color = COLOR_FONDO;
-    Font->Color = COLOR_TEXTO;
-    Font->Name = "Segoe UI";
 
     TLabel *origenLabel = new TLabel(this);
     origenLabel->Parent = this;
@@ -172,7 +103,6 @@ __fastcall TFormConexiones::TFormConexiones(TComponent* Owner, Grafo *grafo)
     cerrar->Caption = "Cerrar";
     cerrar->OnClick = CerrarClick;
 
-    EstilizarFormulario(this);
     CargarCombos();
 }
 
